@@ -1,0 +1,10 @@
+// Place your settings in this file to overwrite default and user settings.
+{
+    "editor.tabSize": 2,
+    "javascript.validate.enable": false,
+    "editor.renderWhitespace": "none",
+    "files.eol": "\n",
+    "files.autoSave": "off",
+    "flow.pathToFlow": "${workspaceRoot}\\node_modules\\.bin\\flow",
+    "flow.useLSP": false
+}

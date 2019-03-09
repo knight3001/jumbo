@@ -2,16 +2,54 @@
   "name": "jumbo",
   "version": "0.1.0",
   "private": true,
+  "devDependencies": {
+    "eslint-plugin-flow-header": "^0.2.0",
+    "eslint-plugin-flowtype": "^3.2.0",
+    "eslint-plugin-react": "^7.11.1",
+    "flow-bin": "^0.89.0",
+    "pushstate-server": "^3.0.1",
+    "react-scripts": "^2.1.8",
+    "node-sass-chokidar": "^1.3.3",
+    "@babel/cli": "^7.2.3",
+    "@babel/core": "^7.2.2",
+    "@babel/plugin-proposal-class-properties": "^7.3.0",
+    "@babel/plugin-proposal-object-rest-spread": "^7.3.1",
+    "@babel/plugin-transform-react-jsx": "^7.3.0",
+    "@babel/preset-env": "^7.3.1",
+    "@babel/preset-flow": "^7.0.0",
+    "@babel/preset-react": "^7.0.0",
+    "babel-eslint": "^9.0.0",
+    "babel-jest": "23.6.0"
+  },
   "dependencies": {
+    "@material-ui/core": "^3.9.2",
+    "@material-ui/icons": "^3.0.2",
+    "@material-ui/lab": "^3.0.0-alpha.30",
+    "moment": "^2.18.1",
     "react": "^16.8.4",
     "react-dom": "^16.8.4",
-    "react-scripts": "2.1.8"
+    "react-redux": "^5.0.7",
+    "react-router": "^3.0.0",
+    "redux": "^4.0.0",
+    "redux-logger": "^2.7.4",
+    "redux-thunk": "^2.1.0",
+    "classnames": "^2.2.5",
+    "babel-polyfill": "^6.26.0",
+    "react-app-polyfill": "^0.2.0",
+    "enzyme": "^3.8.0",
+    "enzyme-adapter-react-16": "^1.9.1",
+    "react-test-renderer": "^16.8.1"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "flow": "flow",
+    "flow_status": "flow status",
+    "flow_stop": "flow stop",
+    "flow_check": "flow check || exit 0",
+    "test-build": "pushstate-server build"
   },
   "eslintConfig": {
     "extends": "react-app"
