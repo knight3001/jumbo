@@ -5,12 +5,13 @@ import type { DispatchType } from "../types/redux";
 
 import { GET_POPULAR_MOVIES, GET_MOVIE_DETAIL } from "../types/actionNames";
 
+const root = Properties.api_root;
 const key = Properties.key;
 
 export const fetchPopularMovies = (callback?: Function = null): * => (
   dispatch: DispatchType
 ): * => {
-  return fetch(`/movie/popular?api_key=${key}&page=1`, getInit)
+  return fetch(`${root}/movie/popular?api_key=${key}&page=1`, getInit)
     .then((response: Response): Promise<*> => response.json())
     .then(
       (json: *): DispatchType => {
@@ -25,7 +26,7 @@ export const fetchMovieDetail = (
   callback?: Function = null,
   failBack?: Function = null
 ): * => (dispatch: DispatchType): * => {
-  return fetch(`/movie/${movieId}?api_key=${key}`, getInit)
+  return fetch(`${root}/movie/${movieId}?api_key=${key}`, getInit)
     .then((response: Response): Promise<*> => response.json())
     .then(
       (json: *): DispatchType => {

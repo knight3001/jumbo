@@ -70,7 +70,8 @@ const styles = (theme: *): * => ({
   content: {
     fontSize: "1rem",
     lineHeight: "24px",
-    color: "#9FBBC7"
+    color: "#9FBBC7",
+    marginBottom: "60px",
   }
 });
 
