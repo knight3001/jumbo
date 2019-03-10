@@ -4,12 +4,13 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 
 import type { StateType, DispatchType } from "../types/redux";
+import type { MovieType } from "../types//MovieType";
 import HomeHeader from "../components/HomeHeader";
 import HomeBody from "../components/HomeBody";
 import { fetchPopularMovies } from "../actions/movieActions";
 
 type HomePropsType = {
-  movies: Array<{ [key: string]: * }>,
+  movies: Array<MovieType>,
   actions: { fetchPopularMovies: Function }
 };
 
