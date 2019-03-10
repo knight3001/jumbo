@@ -1,12 +1,12 @@
 // @flow
 import React, { Component } from "react";
 import moment from "moment";
+import { Link } from "react-router";
 import classNames from "classnames";
 import withStyles from "@material-ui/core/styles/withStyles";
 import Chip from "@material-ui/core/Chip";
 
 import type { MovieType } from "../types//MovieType";
-import {} from "../types/styles";
 import Properties from "../../Properties";
 
 const ImageRoot = Properties.image_root;
@@ -48,9 +48,10 @@ const styles = (theme: *): * => ({
     position: "absolute",
     top: "11px",
     left: "11px",
-
     color: "#FFFFFF",
-    fontSize: "0.75rem"
+    fontSize: "0.75rem",
+    padding: 0,
+    height: "auto"
   },
   green: {
     backgroundColor: "#01D277"
@@ -89,10 +90,12 @@ class MovieItem extends Component<MovieItemPropsType, *> {
     }
     return (
       <div className={classes.box}>
-        <div
-          className={classes.img}
-          style={{ backgroundImage: "url(" + url + ")" }}
-        />
+        <Link to={"/movie/" + movie.id}>
+          <div
+            className={classes.img}
+            style={{ backgroundImage: "url(" + url + ")" }}
+          />
+        </Link>
         <div className={classes.title}>{movie.title}</div>
         <div className={classes.date}>
           {moment(movie.release_date).format("MMMM YYYY")}
