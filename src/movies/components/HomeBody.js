@@ -5,6 +5,7 @@ import withStyles from "@material-ui/core/styles/withStyles";
 
 import { container, title } from "../types/styles";
 import MovieList from "../containers/MovieList";
+import SearchBox from "../containers/SearchBox";
 
 const styles = (theme: *): * => ({
   container,
@@ -30,6 +31,7 @@ class HomeBody extends Component<HomeBodyPropsType, *> {
     const { classes } = this.props;
     return (
       <div className={classes.container}>
+        <SearchBox />
         <div className={classes.title}>Popular Movies</div>
         <MovieList />
       </div>
