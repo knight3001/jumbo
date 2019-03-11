@@ -1,6 +1,6 @@
 {
   "parser": "babel-eslint",
-  "plugins": ["flowtype", "react", "flow-header"],
+  "plugins": ["flowtype", "react", "flow-header", "cypress"],
   "rules": {
     "indent": ["error", 2, { "SwitchCase": 1 }],
     "linebreak-style": ["error", "unix"],
@@ -40,9 +40,10 @@
   "env": {
     "browser": true,
     "es6": true,
-    "jest": true
+    "jest": true,
+    "cypress/globals": true
   },
-  "extends": ["plugin:flowtype/recommended"],
+  "extends": ["plugin:flowtype/recommended", "plugin:cypress/recommended"],
   "parserOptions": {
     "ecmaFeatures": {
       "experimentalObjectRestSpread": true,
