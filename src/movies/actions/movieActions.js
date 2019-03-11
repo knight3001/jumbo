@@ -8,7 +8,8 @@ import {
   GET_MOVIE_DETAIL,
   SEARCH_MOVIE,
   SET_UPDATING,
-  SET_SEARCH_QUERY
+  SET_SEARCH_QUERY,
+  CLEAR_SEARCH
 } from "../types/actionNames";
 
 const root = Properties.api_root;
@@ -54,6 +55,7 @@ export const setQuery = (query: string): * => ({
 export const SearchMovies = (query: string, callback?: Function = null): * => (
   dispatch: DispatchType
 ): * => {
+  dispatch({ type: CLEAR_SEARCH });
   dispatch({ type: SET_UPDATING, isSearching: true });
   dispatch(setQuery(query));
   if (query) {

@@ -4,7 +4,8 @@ import {
   GET_MOVIE_DETAIL,
   SEARCH_MOVIE,
   SET_UPDATING,
-  SET_SEARCH_QUERY
+  SET_SEARCH_QUERY,
+  CLEAR_SEARCH
 } from "../types/actionNames";
 
 const initialState = {
@@ -57,6 +58,12 @@ const movieReducers = (state: * = initialState, actions: *): * => {
         };
       }
       return state;
+
+    case CLEAR_SEARCH:
+      return {
+        ...state,
+        searchList: null
+      };
 
     case SET_SEARCH_QUERY:
       if (actions.query !== undefined) {

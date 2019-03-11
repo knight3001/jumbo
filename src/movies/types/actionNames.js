@@ -5,3 +5,4 @@ export const GET_MOVIE_DETAIL = "GET_MOVIE_DETAIL";
 export const SEARCH_MOVIE = "SEARCH_MOVIE";
 export const SET_UPDATING = "SET_UPDATING";
 export const SET_SEARCH_QUERY = "SET_SEARCH_QUERY";
+export const CLEAR_SEARCH = "CLEAR_SEARCH";
