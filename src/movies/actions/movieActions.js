@@ -3,7 +3,13 @@ import Properties from "../../Properties";
 import { getInit, postInit } from "../types/constants";
 import type { DispatchType } from "../types/redux";
 
-import { GET_POPULAR_MOVIES, GET_MOVIE_DETAIL } from "../types/actionNames";
+import {
+  GET_POPULAR_MOVIES,
+  GET_MOVIE_DETAIL,
+  SEARCH_MOVIE,
+  SET_UPDATING,
+  SET_SEARCH_QUERY
+} from "../types/actionNames";
 
 const root = Properties.api_root;
 const key = Properties.key;
@@ -38,4 +44,32 @@ export const fetchMovieDetail = (
         }
       }
     );
+};
+
+export const setQuery = (query: string): * => ({
+  type: SET_SEARCH_QUERY,
+  query: query
+});
+
+export const SearchMovies = (query: string, callback?: Function = null): * => (
+  dispatch: DispatchType
+): * => {
+  dispatch({ type: SET_UPDATING, isSearching: true });
+  dispatch(setQuery(query));
+  if (query) {
+    return fetch(
+      `${root}/search/movie?api_key=${key}&page=1&query=${query}`,
+      getInit
+    )
+      .then((response: Response): Promise<*> => response.json())
+      .then(
+        (json: *): DispatchType => {
+          dispatch({ type: SEARCH_MOVIE, movies: json.results });
+          dispatch({ type: SET_UPDATING, isSearching: false });
+          callback && callback(json.results);
+        }
+      );
+  } else {
+    return dispatch({ type: SET_UPDATING, isSearching: false });
+  }
 };

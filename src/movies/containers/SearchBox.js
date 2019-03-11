@@ -1,6 +1,7 @@
 // @flow
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
 import classNames from "classnames";
 import withStyles from "@material-ui/core/styles/withStyles";
 import Input from "@material-ui/core/Input";
@@ -14,6 +15,7 @@ import SearchIcon from "@material-ui/icons/Search";
 import type { StateType, DispatchType } from "../types/redux";
 import type { MovieType } from "../types/MovieType";
 import Loading from "../components/Loading";
+import { SearchMovies } from "../actions/movieActions";
 
 const styles = (theme: *): * => ({
   root: {
@@ -21,30 +23,32 @@ const styles = (theme: *): * => ({
     marginBottom: "40px",
     backgroundColor: "white",
     boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.5)",
-    borderRadius: "22px",
+    borderRadius: "22px"
   },
   input: {
     fontSize: "1rem",
     width: "calc(100% - 24px)",
     transition: "white",
     padding: "13px 20px",
-    color: "#01D277",
+    color: "#01D277"
   },
   icon: {
-    color: "#01D277",
+    color: "#01D277"
   },
   loader: {
-    color: "#01D277",
+    color: "#01D277"
   }
 });
 
 type SearchBoxPropsType = {
-  classes: { [key: string]: * }
+  classes: { [key: string]: * },
+  actions: { SearchMovies: Function },
+  isSearching: boolean,
+  query: string
 };
 
 type SearchBoxStatesType = {
-  inputVal: string,
-  loading: boolean
+  inputVal: string
 };
 
 class SearchBox extends Component<SearchBoxPropsType, SearchBoxStatesType> {
@@ -52,8 +56,7 @@ class SearchBox extends Component<SearchBoxPropsType, SearchBoxStatesType> {
   constructor(props: SearchBoxPropsType) {
     super(props);
     this.state = {
-      inputVal: "",
-      loading: false
+      inputVal: props.query ? props.query : ""
     };
   }
 
@@ -64,7 +67,7 @@ class SearchBox extends Component<SearchBoxPropsType, SearchBoxStatesType> {
     clearTimeout(this.timeout);
     this.timeout = setTimeout(
       function(val: string) {
-        //this.props.fetchPeople(val, true);
+        this.props.actions.SearchMovies(this.state.inputVal.trim());
       }.bind(this, value),
       500
     );
@@ -88,7 +91,7 @@ class SearchBox extends Component<SearchBoxPropsType, SearchBoxStatesType> {
           placeholder="Search"
           endAdornment={
             <InputAdornment position="start">
-              {this.state.loading ? (
+              {this.props.isSearching ? (
                 <CircularProgress
                   size={24}
                   color="primary"
@@ -106,7 +109,14 @@ class SearchBox extends Component<SearchBoxPropsType, SearchBoxStatesType> {
 }
 
 const mapStateToProps = (state: StateType): * => ({
-  movies: state.movie.movies
+  isSearching: state.movie.isSearching
 });
 
-export default connect(mapStateToProps)(withStyles(styles)(SearchBox));
+const mapDispatchToProps = (dispatch: DispatchType): DispatchType => ({
+  actions: bindActionCreators({ SearchMovies }, dispatch)
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(withStyles(styles)(SearchBox));

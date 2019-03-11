@@ -1,13 +1,10 @@
 // @flow
 import React, { Component } from "react";
-import { connect } from "react-redux";
-import classNames from "classnames";
 import withStyles from "@material-ui/core/styles/withStyles";
 
-import type { StateType, DispatchType } from "../types/redux";
-import type { MovieType } from "../types//MovieType";
-import MovieItem from "../components/MovieItem";
-import Loading from "../components/Loading";
+import type { MovieType } from "../types/MovieType";
+import MovieItem from "./MovieItem";
+import Loading from "./Loading";
 
 const styles = (theme: *): * => ({
   wrapper: {
@@ -48,8 +45,4 @@ class MovieList extends Component<MovieListPropsType, *> {
   }
 }
 
-const mapStateToProps = (state: StateType): * => ({
-  movies: state.movie.movies
-});
-
-export default connect(mapStateToProps)(withStyles(styles)(MovieList));
+export default withStyles(styles)(MovieList);

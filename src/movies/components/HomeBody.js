@@ -3,8 +3,9 @@ import React, { Component } from "react";
 import classNames from "classnames";
 import withStyles from "@material-ui/core/styles/withStyles";
 
+import type { MovieType } from "../types/MovieType";
 import { container, title } from "../types/styles";
-import MovieList from "../containers/MovieList";
+import MovieList from "./MovieList";
 import SearchBox from "../containers/SearchBox";
 
 const styles = (theme: *): * => ({
@@ -19,7 +20,9 @@ const styles = (theme: *): * => ({
 });
 
 type HomeBodyPropsType = {
-  classes: { [key: string]: * }
+  classes: { [key: string]: * },
+  movies: Array<MovieType>,
+  query: string
 };
 
 class HomeBody extends Component<HomeBodyPropsType, *> {
@@ -31,9 +34,11 @@ class HomeBody extends Component<HomeBodyPropsType, *> {
     const { classes } = this.props;
     return (
       <div className={classes.container}>
-        <SearchBox />
-        <div className={classes.title}>Popular Movies</div>
-        <MovieList />
+        <SearchBox query={this.props.query} />
+        <div className={classes.title}>
+          {this.props.query ? "Search Result" : "Popular Movies"}
+        </div>
+        <MovieList movies={this.props.movies} />
       </div>
     );
   }

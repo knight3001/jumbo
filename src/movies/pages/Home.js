@@ -11,7 +11,9 @@ import { fetchPopularMovies } from "../actions/movieActions";
 
 type HomePropsType = {
   movies: Array<MovieType>,
-  actions: { fetchPopularMovies: Function }
+  actions: { fetchPopularMovies: Function },
+  query: string,
+  searchList: Array<MovieType>
 };
 
 class Home extends Component<HomePropsType, *> {
@@ -26,17 +28,20 @@ class Home extends Component<HomePropsType, *> {
   }
 
   render(): * {
+    const movies = this.props.query ? this.props.searchList : this.props.movies;
     return (
       <div>
         <HomeHeader />
-        <HomeBody />
+        <HomeBody movies={movies} query={this.props.query} />
       </div>
     );
   }
 }
 
 const mapStateToProps = (state: StateType): * => ({
-  movies: state.movie.movies
+  movies: state.movie.movies,
+  query: state.movie.query,
+  searchList: state.movie.searchList
 });
 
 const mapDispatchToProps = (dispatch: DispatchType): DispatchType => ({
