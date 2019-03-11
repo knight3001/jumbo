@@ -57,7 +57,7 @@ class Movie extends Component<MoviePropsType, MovieStatesType> {
     if (isSuccess) {
       return <MovieDetail movie={movie} />;
     } else if (isSuccess == false) {
-      return <DisplayMessage message={message} />;
+      return <DisplayMessage message={message} type="error" />;
     } else {
       return <Loading />;
     }

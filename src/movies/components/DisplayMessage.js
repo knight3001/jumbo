@@ -13,6 +13,9 @@ const styles = (theme: *): * => ({
   error: {
     backgroundColor: "red"
   },
+  info: {
+    backgroundColor: "#8a8a8a"
+  },
   box: {
     display: "flex",
     alignItems: "center",
@@ -36,14 +39,15 @@ const styles = (theme: *): * => ({
 
 type DisplayMessagePropsType = {
   classes: { [key: string]: * },
-  message: string
+  message: string,
+  type: "error" | "info"
 };
 
 class DisplayMessage extends Component<DisplayMessagePropsType, *> {
   render(): * {
-    const { classes, message } = this.props;
+    const { classes, message, type } = this.props;
     return (
-      <div className={classNames(classes.banner, classes.error)}>
+      <div className={classNames(classes.banner, classes[type])}>
         <div className={classes.box}>
           <ErrorIcon className={classes.icon} />
           <span className={classes.content}>{message}</span>

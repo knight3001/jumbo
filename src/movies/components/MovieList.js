@@ -5,6 +5,7 @@ import withStyles from "@material-ui/core/styles/withStyles";
 import type { MovieType } from "../types/MovieType";
 import MovieItem from "./MovieItem";
 import Loading from "./Loading";
+import DisplayMessage from "./DisplayMessage";
 
 const styles = (theme: *): * => ({
   wrapper: {
@@ -29,7 +30,7 @@ class MovieList extends Component<MovieListPropsType, *> {
   render(): * {
     const { classes, movies } = this.props;
 
-    if (movies) {
+    if (movies && movies.length > 0) {
       return (
         <div className={classes.wrapper}>
           {movies.map(
@@ -39,6 +40,8 @@ class MovieList extends Component<MovieListPropsType, *> {
           )}
         </div>
       );
+    } else if (movies && movies.length === 0) {
+      return <DisplayMessage message="No Movie Found" type="info" />;
     } else {
       return <Loading />;
     }
