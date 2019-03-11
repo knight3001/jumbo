@@ -11,11 +11,12 @@ import FormHelperText from "@material-ui/core/FormHelperText";
 import InputAdornment from "@material-ui/core/InputAdornment";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import SearchIcon from "@material-ui/icons/Search";
+import CloseIcon from "@material-ui/icons/Close";
 
 import type { StateType, DispatchType } from "../types/redux";
 import type { MovieType } from "../types/MovieType";
 import Loading from "../components/Loading";
-import { SearchMovies } from "../actions/movieActions";
+import { SearchMovies, setQuery } from "../actions/movieActions";
 
 const styles = (theme: *): * => ({
   root: {
@@ -37,12 +38,15 @@ const styles = (theme: *): * => ({
   },
   loader: {
     color: "#01D277"
+  },
+  click: {
+    cursor: "pointer"
   }
 });
 
 type SearchBoxPropsType = {
   classes: { [key: string]: * },
-  actions: { SearchMovies: Function },
+  actions: { SearchMovies: Function, setQuery: Function },
   isSearching: boolean,
   query: string
 };
@@ -73,6 +77,15 @@ class SearchBox extends Component<SearchBoxPropsType, SearchBoxStatesType> {
     );
   };
 
+  clearSearch = (): * => {
+    this.setState(
+      { inputVal: "" },
+      (): * => {
+        this.props.actions.setQuery("");
+      }
+    );
+  };
+
   render(): * {
     const { classes } = this.props;
 
@@ -91,6 +104,12 @@ class SearchBox extends Component<SearchBoxPropsType, SearchBoxStatesType> {
           placeholder="Search"
           endAdornment={
             <InputAdornment position="start">
+              {this.state.inputVal && (
+                <CloseIcon
+                  className={classNames(classes.icon, classes.click)}
+                  onClick={this.clearSearch}
+                />
+              )}
               {this.props.isSearching ? (
                 <CircularProgress
                   size={24}
@@ -113,7 +132,7 @@ const mapStateToProps = (state: StateType): * => ({
 });
 
 const mapDispatchToProps = (dispatch: DispatchType): DispatchType => ({
-  actions: bindActionCreators({ SearchMovies }, dispatch)
+  actions: bindActionCreators({ SearchMovies, setQuery }, dispatch)
 });
 
 export default connect(
